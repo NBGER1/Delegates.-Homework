@@ -1,4 +1,5 @@
-﻿using Delegates.Models;
+﻿using System.Security.Policy;
+using Delegates.Models;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,36 +11,69 @@ namespace Delegates
         #region Consts
 
         private const int COINS_TO_ADD = 10;
-        
+
         private const int COINS_TO_WITHDRAW = 10;
+        private const float MANA_TO_ADD = 10;
+        private const float MANA_TO_WITHDRAW = 10;
 
         #endregion
-        
+
+        #region Fields
+
+        private PlayerModel _playerModel;
+
+        #endregion
+
         #region Methods
-        
+
         public override void OnInspectorGUI()
         {
-            var playerModel = (PlayerModel) target;
+            _playerModel = target as PlayerModel;
+            BalanceGUI();
+            ManaGUI();
+
+        }
+
+        private void BalanceGUI()
+        {
             GUILayout.Label("Player Model", EditorStyles.boldLabel);
-            
             GUILayout.Space(10);
             GUILayout.BeginHorizontal();
             GUILayout.Label("Coins Balance");
-            GUILayout.TextField(playerModel.CoinsBalance.ToString());
+            GUILayout.TextField(_playerModel.CoinsBalance.ToString());
 
             if (GUILayout.Button("+"))
             {
-                playerModel.AddCoins(COINS_TO_ADD);
+                _playerModel.AddCoins(COINS_TO_ADD);
             }
 
             if (GUILayout.Button("-"))
             {
-                playerModel.WithdrawCoins(COINS_TO_WITHDRAW);
+                _playerModel.WithdrawCoins(COINS_TO_WITHDRAW);
             }
 
             GUILayout.EndHorizontal();
         }
-        
+
+        private void ManaGUI()
+        {
+           // GUILayout.Space(10);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Player Mana");
+            GUILayout.TextField(_playerModel.Mana.ToString());
+            if (GUILayout.Button("+"))
+            {
+                _playerModel.AddMana(MANA_TO_ADD);
+            }
+
+            if (GUILayout.Button("-"))
+            {
+                _playerModel.WithdrawMana(MANA_TO_WITHDRAW);
+            }
+
+            GUILayout.EndHorizontal();
+        }
+
         #endregion
     }
 }
