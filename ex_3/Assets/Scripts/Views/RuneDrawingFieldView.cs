@@ -20,7 +20,7 @@ namespace Runes.Views
         #region Fields
 
         private Dictionary<string, int> _runesDictionary = new Dictionary<string, int>();
-        private Stack<Transform> _transformStack;
+        private Queue<Transform> _transformQueue;
         private RuneView _runeView;
 
         #endregion
@@ -60,14 +60,21 @@ namespace Runes.Views
         private void DrawRune()
 
         {
-            if (_transformStack.Count > 0)
+            if (_transformQueue.Count > 0)
             {
-                var target = _transformStack.Pop();
-                Debug.Log($"Next point ${target.position}");
+                var target = _transformQueue.Dequeue();
                 StartCoroutine(MoveRune(target.position, DrawRune));
             }
         }
 
+        private void PrepareRune()
+        {
+            _runeView.RuneBrush.position = _runeView.RuneBrushOrigin.position;
+            var pointsArray = _runeView.RunePoints;
+
+            _transformQueue = new Queue<Transform>(pointsArray);
+            DrawRune();
+        }
 
         public void RequestRune(string runeName)
         {
@@ -78,11 +85,7 @@ namespace Runes.Views
             }
 
             _runeView = GameplayElements.Instance.StarRune;
-            var pointsArray = _runeView.RunePoints;
-
-            _transformStack = new Stack<Transform>(pointsArray);
-            _transformStack.Reverse();
-            DrawRune();
+            PrepareRune();
         }
 
         #endregion

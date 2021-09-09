@@ -11,10 +11,11 @@ namespace Delegates
         #region Consts
 
         private const int COINS_TO_ADD = 10;
-
         private const int COINS_TO_WITHDRAW = 10;
         private const float MANA_TO_ADD = 10;
         private const float MANA_TO_WITHDRAW = 10;
+        private const float HEALTH_TO_ADD = 10;
+        private const float HEALTH_TO_WITHDRAW = 10;
 
         #endregion
 
@@ -31,7 +32,25 @@ namespace Delegates
             _playerModel = target as PlayerModel;
             BalanceGUI();
             ManaGUI();
+            HealthGUI();
+        }
 
+        private void HealthGUI()
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Player Health");
+            GUILayout.TextField(_playerModel.Health.ToString());
+            if (GUILayout.Button("+"))
+            {
+                _playerModel.AddHealth(HEALTH_TO_ADD);
+            }
+
+            if (GUILayout.Button("-"))
+            {
+                _playerModel.WithdrawHealth(HEALTH_TO_WITHDRAW);
+            }
+
+            GUILayout.EndHorizontal();
         }
 
         private void BalanceGUI()
@@ -57,7 +76,7 @@ namespace Delegates
 
         private void ManaGUI()
         {
-           // GUILayout.Space(10);
+            // GUILayout.Space(10);
             GUILayout.BeginHorizontal();
             GUILayout.Label("Player Mana");
             GUILayout.TextField(_playerModel.Mana.ToString());

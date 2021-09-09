@@ -10,6 +10,7 @@ public class RuneView : MonoBehaviour
     [SerializeField] private RuneModel _runeModel;
     [SerializeField] private Transform[] _runePoints;
     [SerializeField] private Transform _runeBrush;
+    [SerializeField] private Transform _runeBrushOrigin;
 
     #endregion
 
@@ -18,6 +19,7 @@ public class RuneView : MonoBehaviour
     public RuneModel RuneModel => _runeModel;
     public Transform[] RunePoints => _runePoints;
     public Transform RuneBrush => _runeBrush;
+    public Transform RuneBrushOrigin => _runeBrushOrigin;
 
     #endregion
 }

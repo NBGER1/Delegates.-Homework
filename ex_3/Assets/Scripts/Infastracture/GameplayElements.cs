@@ -8,7 +8,6 @@ namespace Infastracture
         #region Editor
 
         [SerializeField] private RuneView _starRune;
-
         #endregion
 
         #region Properties

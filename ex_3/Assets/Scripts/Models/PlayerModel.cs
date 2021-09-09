@@ -11,6 +11,7 @@ namespace Delegates.Models
 
         [SerializeField] private int _coinsBalance;
         [SerializeField] [Range(0f, 100f)] private float _mana;
+        [SerializeField] [Range(0f, 100f)] private float _health;
 
         #endregion
 
@@ -18,7 +19,7 @@ namespace Delegates.Models
 
         public event Action<int> BalancechangedEvent;
         public event Action<float> ManaChangedEvent;
-
+        public event Action<float> HealthChangedEvent;
         #endregion
 
         #region Methods
@@ -47,12 +48,25 @@ namespace Delegates.Models
             ManaChangedEvent?.Invoke(_mana);
         }
 
+        public void AddHealth(float healthToAdd)
+        {
+            _health += healthToAdd;
+            HealthChangedEvent?.Invoke(_health);
+        }
+
+        public void WithdrawHealth(float healthToWithdraw)
+        {
+            _health = Mathf.Max(_health - healthToWithdraw, 0);
+            HealthChangedEvent?.Invoke(_health);
+        }
+
         #endregion
 
         #region Properties
 
         public int CoinsBalance => _coinsBalance;
         public float Mana => _mana;
+        public float Health => _health;
 
         #endregion
     }
