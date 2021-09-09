@@ -8,14 +8,14 @@ namespace Infastracture
     {
         #region Methods
 
-        public Awaiter WaitFor(float delay)
+        public IAwaiter WaitFor(float delay)
         {
             var awaiter = new Awaiter();
             GameplayServices.CoroutineService.RunCoroutine(WaitForInternal(delay, awaiter));
             return awaiter;
         }
 
-        private IEnumerator WaitForInternal(float delay, Awaiter awaiter)
+        private IEnumerator WaitForInternal(float delay, IAwaiter awaiter)
         {
             yield return null;
             awaiter.Start();

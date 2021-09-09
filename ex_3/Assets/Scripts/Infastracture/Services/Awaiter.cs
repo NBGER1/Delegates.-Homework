@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Infastracture
 {
-    public class Awaiter
+    public class Awaiter : IAwaiter
     {
         #region Fields
 
@@ -14,13 +14,13 @@ namespace Infastracture
 
         #region Methods
 
-        public Awaiter OnStart(Action onStartCallback)
+        public IAwaiter OnStart(Action onStartCallback)
         {
             _onStartCallback = onStartCallback;
             return this;
         }
 
-        public Awaiter OnEnd(Action onEndCallback)
+        public IAwaiter OnEnd(Action onEndCallback)
         {
             _onEndCallback = onEndCallback;
             return this;

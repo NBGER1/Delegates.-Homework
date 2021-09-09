@@ -8,7 +8,7 @@ namespace Infastracture
         #region Fields
 
         private static ICoroutineService _coroutineService;
-        private static WaitService _waitService;
+        private static IWaitService _waitService;
 
         #endregion
 
@@ -18,7 +18,6 @@ namespace Infastracture
         {
             var csgo = new GameObject("CoroutineService");
             _coroutineService = csgo.AddComponent<CoroutineService>();
-            _waitService = new WaitService();
         }
 
         #endregion
@@ -26,7 +25,7 @@ namespace Infastracture
         #region Properties
 
         public static ICoroutineService CoroutineService => _coroutineService;
-        public static WaitService WaitService => _waitService;
+        public static IWaitService WaitService => _waitService;
 
         #endregion
     }
