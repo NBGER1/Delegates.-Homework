@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _manaCost: 10
   _damage: 0
-  _oneUnitMoveTime: 0.5
+  _oneUnitMoveTime: 0.2

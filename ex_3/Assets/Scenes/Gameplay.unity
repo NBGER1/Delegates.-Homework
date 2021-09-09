@@ -598,7 +598,7 @@ PrefabInstance:
     - target: {fileID: 2669950406746587117, guid: dcd62c2d8a79e644fae0778a2080b29e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DrawRune
+      value: RequestRune
       objectReference: {fileID: 0}
     - target: {fileID: 2669950406746587117, guid: dcd62c2d8a79e644fae0778a2080b29e,
         type: 3}
@@ -956,8 +956,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _runeBrush
       value: 
-      objectReference: {fileID: 8992728831942965272, guid: 0285a20f04d62204188cdd00c8e559f2,
-        type: 3}
+      objectReference: {fileID: 153723813}
     - target: {fileID: 331618534426485216, guid: f47bfff4a5282d043a2a08b03518872b,
         type: 3}
       propertyPath: _runePoints.Array.data[0]
