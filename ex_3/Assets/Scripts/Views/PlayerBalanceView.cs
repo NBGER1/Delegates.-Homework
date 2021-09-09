@@ -35,7 +35,7 @@ namespace Delegates.Views
             _coinsBalance.text = _playerModel.CoinsBalance.ToString();
         }
 
-        private void OnBalanceUpdate(int playerBalance)
+        private void OnBalanceUpdate(int balance)
         {
             UpdateCoinsBalance();
         }
