@@ -17,6 +17,7 @@ namespace Infastracture
 
         private IEnumerator WaitForInternal(float delay, Awaiter awaiter)
         {
+            yield return null;
             awaiter.Start();
             yield return new WaitForSeconds(delay);
             awaiter.End();
