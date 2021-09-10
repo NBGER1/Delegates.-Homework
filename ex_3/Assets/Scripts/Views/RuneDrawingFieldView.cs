@@ -7,23 +7,24 @@ using Infastracture;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 namespace Runes.Views
 {
     public class RuneDrawingFieldView : MonoBehaviour
     {
-        #region Editor
+        #region Events
 
-        [SerializeField] private TextMeshPro _manaValueText;
-        [SerializeField] private PlayerModel _playerModel;
+        public event Action<int> RuneDrawEvent;
+        public event Action RuneDrawCompleteEvent;
+
+        #endregion
 
         #region Fields
 
-        private Dictionary<string, int> _runesDictionary = new Dictionary<string, int>();
+        private Dictionary<string, RuneView> _runesDictionary = new Dictionary<string, RuneView>();
         private Queue<Transform> _transformQueue;
         private RuneView _runeView;
-
-        #endregion
 
         #endregion
 
@@ -36,7 +37,7 @@ namespace Runes.Views
 
         private void InitializeDictionary()
         {
-            _runesDictionary.Add("Star", 0);
+            _runesDictionary.Add("Star", GameplayElements.Instance.StarRune);
         }
 
         IEnumerator MoveRune(Vector3 endPoint, Action callback)
@@ -53,10 +54,6 @@ namespace Runes.Views
             callback?.Invoke();
         }
 
-        private void DrawRuneInternal()
-        {
-        }
-
         private void DrawRune()
 
         {
@@ -65,26 +62,33 @@ namespace Runes.Views
                 var target = _transformQueue.Dequeue();
                 StartCoroutine(MoveRune(target.position, DrawRune));
             }
+            else
+            {
+                RuneDrawCompleteEvent?.Invoke();
+            }
         }
 
         private void PrepareRune()
         {
-            _runeView.RuneBrush.position = _runeView.RuneBrushOrigin.position;
-            var pointsArray = _runeView.RunePoints;
+            if (GameplayElements.Instance.PlayerModel.Mana - _runeView.RuneModel.ManaCost >= 0)
+            {
+                RuneDrawEvent?.Invoke(_runeView.RuneModel.ManaCost);
+                _runeView.RuneBrush.position = _runeView.RuneBrushOrigin.position;
+                var pointsArray = _runeView.RunePoints;
 
-            _transformQueue = new Queue<Transform>(pointsArray);
-            DrawRune();
+                _transformQueue = new Queue<Transform>(pointsArray);
+                DrawRune();
+            }
         }
 
         public void RequestRune(string runeName)
         {
-            //TODO: Create Interface?
             if (!_runesDictionary.ContainsKey(runeName))
             {
                 throw new NullReferenceException($"Rune {runeName} doesn't exist in the dictionary!");
             }
 
-            _runeView = GameplayElements.Instance.StarRune;
+            _runeView = _runesDictionary[runeName];
             PrepareRune();
         }
 

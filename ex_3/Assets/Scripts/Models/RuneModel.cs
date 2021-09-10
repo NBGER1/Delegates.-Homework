@@ -7,7 +7,7 @@ namespace Delegates.Models
     {
         #region Editor
 
-        [SerializeField] [Range(0f, 100f)] private float _manaCost;
+        [SerializeField] [Range(0, 100)] private int _manaCost;
         [SerializeField] [Range(0f, 100f)] private float _damage;
         [SerializeField] [Range(0f, 10f)] private float _oneUnitMoveTime = 0.5f;
 
@@ -15,7 +15,7 @@ namespace Delegates.Models
 
         #region Properties
 
-        public float ManaCost => _manaCost;
+        public int ManaCost => _manaCost;
         public float Damage => _damage;
         public float OneUnitMoveTime => _oneUnitMoveTime;
 

@@ -17,7 +17,7 @@ namespace Delegates.Models
 
         #region Events
 
-        public event Action<int> BalancechangedEvent;
+        public event Action<int> BalanceChangedEvent;
         public event Action<float> ManaChangedEvent;
         public event Action<float> HealthChangedEvent;
         #endregion
@@ -27,13 +27,13 @@ namespace Delegates.Models
         public void AddCoins(int coinsToAdd)
         {
             _coinsBalance += coinsToAdd;
-            BalancechangedEvent?.Invoke(_coinsBalance);
+            BalanceChangedEvent?.Invoke(_coinsBalance);
         }
 
         public void WithdrawCoins(int coinsToWithdraw)
         {
             _coinsBalance = Mathf.Max(0, _coinsBalance - coinsToWithdraw);
-            BalancechangedEvent?.Invoke(_coinsBalance);
+            BalanceChangedEvent?.Invoke(_coinsBalance);
         }
 
         public void AddMana(float manaToAdd)

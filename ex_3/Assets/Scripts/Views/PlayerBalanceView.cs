@@ -1,5 +1,6 @@
 using System;
 using Delegates.Models;
+using Infastracture;
 using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -22,12 +23,14 @@ namespace Delegates.Views
         private void Awake()
         {
             UpdateCoinsBalance();
-            _playerModel.BalancechangedEvent += OnBalanceUpdate;
+            _playerModel.BalanceChangedEvent += OnBalanceUpdate;
+            GameplayElements.Instance.RuneDrawingFieldView.RuneDrawEvent += OnRuneDraw;
         }
 
         private void OnDestroy()
         {
-            _playerModel.BalancechangedEvent -= OnBalanceUpdate;
+            _playerModel.BalanceChangedEvent -= OnBalanceUpdate;
+            GameplayElements.Instance.RuneDrawingFieldView.RuneDrawEvent -= OnRuneDraw;
         }
 
         private void UpdateCoinsBalance()
@@ -38,6 +41,11 @@ namespace Delegates.Views
         private void OnBalanceUpdate(int balance)
         {
             UpdateCoinsBalance();
+        }
+
+        private void OnRuneDraw(int cost)
+        {
+            _playerModel.WithdrawMana(cost);
         }
 
         #endregion

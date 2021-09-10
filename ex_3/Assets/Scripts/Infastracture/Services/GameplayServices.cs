@@ -1,4 +1,7 @@
 ﻿using System;
+using Gameplay;
+using UI;
+using UnityEditor;
 using UnityEngine;
 
 namespace Infastracture
@@ -18,6 +21,7 @@ namespace Infastracture
         {
             var csgo = new GameObject("CoroutineService");
             _coroutineService = csgo.AddComponent<CoroutineService>();
+            UIManager.Instance.Initialize();
         }
 
         #endregion
