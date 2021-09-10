@@ -24,13 +24,11 @@ namespace Delegates.Views
         {
             UpdateCoinsBalance();
             _playerModel.BalanceChangedEvent += OnBalanceUpdate;
-            GameplayElements.Instance.RuneDrawingFieldView.RuneDrawEvent += OnRuneDraw;
         }
 
         private void OnDestroy()
         {
             _playerModel.BalanceChangedEvent -= OnBalanceUpdate;
-            GameplayElements.Instance.RuneDrawingFieldView.RuneDrawEvent -= OnRuneDraw;
         }
 
         private void UpdateCoinsBalance()
@@ -43,10 +41,7 @@ namespace Delegates.Views
             UpdateCoinsBalance();
         }
 
-        private void OnRuneDraw(int cost)
-        {
-            _playerModel.WithdrawMana(cost);
-        }
+     
 
         #endregion
     }

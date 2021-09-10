@@ -20,6 +20,7 @@ namespace Delegates.Models
         public event Action<int> BalanceChangedEvent;
         public event Action<float> ManaChangedEvent;
         public event Action<float> HealthChangedEvent;
+
         #endregion
 
         #region Methods
@@ -45,6 +46,7 @@ namespace Delegates.Models
         public void WithdrawMana(float manaToWithdraw)
         {
             _mana = Mathf.Max(_mana - manaToWithdraw, 0);
+            Debug.Log($"Withdrawing {_mana - manaToWithdraw}. Now mana is {_mana}");
             ManaChangedEvent?.Invoke(_mana);
         }
 

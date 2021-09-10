@@ -3,6 +3,7 @@ using Runes.Views;
 using Services;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Views;
 
 namespace Infastracture
 {
@@ -13,6 +14,8 @@ namespace Infastracture
         [SerializeField] private RuneView _starRune;
         [SerializeField] private PlayerModel _playerModel;
         [SerializeField] private RuneDrawingFieldView _runeDrawingFieldView;
+        [SerializeField] private PlayerView _playerView;
+
         #endregion
 
 
@@ -20,7 +23,7 @@ namespace Infastracture
 
         public RuneView StarRune => _starRune;
         public PlayerModel PlayerModel => _playerModel;
-
+        public PlayerView PlayerView => _playerView;
         public RuneDrawingFieldView RuneDrawingFieldView => _runeDrawingFieldView;
 
         protected override GameplayElements GetInstance()

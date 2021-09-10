@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Infastracture
 {
-    public class WaitService
+    public class WaitService : IWaitService
     {
         #region Methods
 

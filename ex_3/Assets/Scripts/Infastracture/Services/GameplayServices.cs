@@ -1,8 +1,4 @@
-﻿using System;
-using Gameplay;
-using UI;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Infastracture
 {
@@ -19,9 +15,11 @@ namespace Infastracture
 
         public static void Initialize()
         {
+            _waitService = new WaitService();
             var csgo = new GameObject("CoroutineService");
             _coroutineService = csgo.AddComponent<CoroutineService>();
-            UIManager.Instance.Initialize();
+            GameplayElements.Instance.PlayerView.Initialize();
+            UIElements.Instance.Initialize();
         }
 
         #endregion
