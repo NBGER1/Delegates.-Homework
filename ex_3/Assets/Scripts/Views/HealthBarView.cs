@@ -1,4 +1,5 @@
 ﻿using System;
+using Delegates.Models;
 using Infastracture;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Views
         [SerializeField] private Slider _slider;
         [SerializeField] private TextMeshProUGUI _maxSliderValueText;
         [SerializeField] private TextMeshProUGUI _sliderValueText;
+        [SerializeField] private HealthBarModel _healthBarModel;
 
         #endregion
 
@@ -26,6 +28,18 @@ namespace Views
             SetMaxSliderText(_slider.maxValue);
             SetSliderValue(health);
             SetSliderText(health);
+            RefillHealth();
+        }
+
+        private void RefillHealth()
+        {
+            GameplayServices.WaitService
+                .WaitFor(_healthBarModel.HealthFillRate)
+                .OnEnd(() =>
+                {
+                    GameplayElements.Instance.PlayerModel.AddHealth(_healthBarModel.HealthFillValue);
+                    RefillHealth();
+                });
         }
 
         public void SetMaxSliderText<T>(T value)

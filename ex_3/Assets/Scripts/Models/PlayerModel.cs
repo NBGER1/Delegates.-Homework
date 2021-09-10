@@ -7,6 +7,13 @@ namespace Delegates.Models
     [CreateAssetMenu(menuName = "Models/Player Model", fileName = "Player Model")]
     public class PlayerModel : ScriptableObject
     {
+        #region Consts
+
+        private const float MAX_MANA = 100f;
+        private const float MAX_HEALTH = 100f;
+
+        #endregion
+
         #region Editor
 
         [SerializeField] private int _coinsBalance;
@@ -39,20 +46,19 @@ namespace Delegates.Models
 
         public void AddMana(float manaToAdd)
         {
-            _mana += manaToAdd;
+            _mana = Mathf.Min(manaToAdd + _mana, MAX_MANA);
             ManaChangedEvent?.Invoke(_mana);
         }
 
         public void WithdrawMana(float manaToWithdraw)
         {
             _mana = Mathf.Max(_mana - manaToWithdraw, 0);
-            Debug.Log($"Withdrawing {_mana - manaToWithdraw}. Now mana is {_mana}");
             ManaChangedEvent?.Invoke(_mana);
         }
 
         public void AddHealth(float healthToAdd)
         {
-            _health += healthToAdd;
+            _health = Mathf.Min(healthToAdd + _health, MAX_HEALTH);
             HealthChangedEvent?.Invoke(_health);
         }
 

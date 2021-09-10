@@ -15,7 +15,7 @@ namespace Runes.Views
     {
         #region Events
 
-        public event Action<int> RuneDrawEvent;
+        public event Action<int, float, float> RuneDrawEvent;
         public event Action RuneDrawCompleteEvent;
 
         #endregion
@@ -38,6 +38,8 @@ namespace Runes.Views
         private void InitializeDictionary()
         {
             _runesDictionary.Add("Star", GameplayElements.Instance.StarRune);
+            _runesDictionary.Add("Eye", GameplayElements.Instance.EyeRune);
+            _runesDictionary.Add("Sun", GameplayElements.Instance.SunRune);
         }
 
         IEnumerator MoveRune(Vector3 endPoint, Action callback)
@@ -65,6 +67,7 @@ namespace Runes.Views
             else
             {
                 RuneDrawCompleteEvent?.Invoke();
+                _runeView = null;
             }
         }
 
@@ -72,12 +75,17 @@ namespace Runes.Views
         {
             if (GameplayElements.Instance.PlayerModel.Mana - _runeView.RuneModel.ManaCost >= 0)
             {
-                RuneDrawEvent?.Invoke(_runeView.RuneModel.ManaCost);
+                RuneDrawEvent?.Invoke(_runeView.RuneModel.ManaCost, _runeView.RuneModel.Heal,
+                    _runeView.RuneModel.Damage);
                 _runeView.RuneBrush.position = _runeView.RuneBrushOrigin.position;
                 var pointsArray = _runeView.RunePoints;
 
                 _transformQueue = new Queue<Transform>(pointsArray);
                 DrawRune();
+            }
+            else
+            {
+                _runeView = null;
             }
         }
 
@@ -88,8 +96,11 @@ namespace Runes.Views
                 throw new NullReferenceException($"Rune {runeName} doesn't exist in the dictionary!");
             }
 
-            _runeView = _runesDictionary[runeName];
-            PrepareRune();
+            if (_runeView == null)
+            {
+                _runeView = _runesDictionary[runeName];
+                PrepareRune();
+            }
         }
 
         #endregion

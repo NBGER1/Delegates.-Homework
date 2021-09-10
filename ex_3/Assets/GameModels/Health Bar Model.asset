@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 296fc237c0e0445fb389ce4b8710aa2e, type: 3}
-  m_Name: Mana Bar Model
+  m_Script: {fileID: 11500000, guid: 7a86b7f8fa7f43d49345a6a13ead0c11, type: 3}
+  m_Name: Health Bar Model
   m_EditorClassIdentifier: 
-  _manaFillRate: 1.5
-  _manaFillValue: 20
+  _healthFillRate: 5
+  _healthFillValue: 33

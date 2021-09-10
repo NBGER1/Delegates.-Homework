@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 296fc237c0e0445fb389ce4b8710aa2e, type: 3}
-  m_Name: Mana Bar Model
+  m_Script: {fileID: 11500000, guid: a969173455c74fcf94db267fef7c5113, type: 3}
+  m_Name: Rune Sun
   m_EditorClassIdentifier: 
-  _manaFillRate: 1.5
-  _manaFillValue: 20
+  _manaCost: 50
+  _damage: 0
+  _oneUnitMoveTime: 0.5
+  _heal: 25
